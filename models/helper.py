@@ -3,7 +3,7 @@ from . import aggregators
 from . import backbones
 
 
-def get_backbone(backbone_arch='resnet50',
+def get_backbone(backbone_arch='resnet18',
                  pretrained=True,
                  layers_to_freeze=2,
                  layers_to_crop=[],):
