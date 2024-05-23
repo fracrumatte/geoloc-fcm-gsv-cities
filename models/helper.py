@@ -91,10 +91,10 @@ def main():
     print_nb_params(agg)
     
     for name, child in backbone.named_children():   #aggiungerlo nel main dell'helper
-                if name == "layer3":  # Freeze layers before conv_3
-                    break
-                for params in child.parameters():
-                    params.requires_grad = False
+            if name == "layer3":  # Freeze layers before conv_3
+                  break
+            for params in child.parameters():
+                  params.requires_grad = False
     backbone_output = backbone(x)
     agg_output = agg(backbone_output)
     print(f'output shape: {agg_output.shape}')
