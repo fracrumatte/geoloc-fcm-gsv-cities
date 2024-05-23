@@ -5,7 +5,7 @@ import numpy as np
 
 class ResNet(nn.Module):
     def __init__(self,
-                 model_name='resnet50',
+                 model_name='resnet18',
                  pretrained=True,
                  layers_to_freeze=2,
                  layers_to_crop=[],
