@@ -15,7 +15,7 @@ class VPRModel(pl.LightningModule):
 
     def __init__(self,
                 #---- Backbone
-                backbone_arch='resnet50',
+                backbone_arch='resnet18',
                 pretrained=True,
                 layers_to_freeze=1,
                 layers_to_crop=[],
