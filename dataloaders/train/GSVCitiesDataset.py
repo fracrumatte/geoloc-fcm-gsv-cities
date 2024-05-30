@@ -45,6 +45,20 @@ class GSVCitiesDataset(Dataset):
         # get all unique place ids
         self.places_ids = pd.unique(self.dataframe.index)
         self.total_nb_images = len(self.dataframe)
+    def imgTitleExtractor_():
+       
+        
+        pattern = r'@([^@]+)@'
+
+
+
+        text = '@0669394.88@1520993.59@47@P@013.75330@0100.56677@hgRRIc-rmtuqnLTx86BJDQ@@213@@@@201706@3385_Bangkok@.jpg'
+        text = text.replace('@','@@')
+        text = text.replace('_','@@')
+        matches = re.findall(pattern, text)
+        x= [matches[8][0:4],matches[8][4:],matches[9],matches[10]]
+        matches[0:8]+=x
+        matches[:12]
         
     def __getdataframes(self):
         ''' 
