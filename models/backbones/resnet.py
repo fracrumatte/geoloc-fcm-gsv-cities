@@ -8,7 +8,7 @@ class ResNet(nn.Module):
                  model_name='resnet18',
                  pretrained=True,
                  layers_to_freeze=2,
-                 layers_to_crop=[],
+                 layers_to_crop=[4],
                  ):
         """Class representing the resnet backbone used in the pipeline
         we consider resnet network as a list of 5 blocks (from 0 to 4),
@@ -99,5 +99,5 @@ class ResNet(nn.Module):
             x = self.model.layer3(x)
         if self.model.layer4 is not None:
             x = self.model.layer4(x)
-        #x = self.model.avgpool(x)
+        x = self.model.avgpool(x)
         return x
