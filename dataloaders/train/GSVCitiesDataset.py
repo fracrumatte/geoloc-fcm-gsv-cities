@@ -13,7 +13,7 @@ default_transform = T.Compose([
 ])
 
 # NOTE: Hard coded path to dataset folder 
-BASE_PATH = '/home/USER/work/datasets/gsv_cities/'
+BASE_PATH = '/content/drive/MyDrive/geoloc_fcm/extracted_datasets/gsv_xs/train/'
 
 if not Path(BASE_PATH).exists():
     raise FileNotFoundError(
@@ -70,15 +70,14 @@ class GSVCitiesDataset(Dataset):
             for each city in self.cities
         '''
         # read the first city dataframe
-        df = pd.read_csv(self.base_path+'Dataframes/'+f'{self.cities[0]}.csv')
+        df = pd.read_csv(self.base_path+f'{self.cities[0]}.csv') 
         df = df.sample(frac=1)  # shuffle the city dataframe
         
 
         # append other cities one by one
         for i in range(1, len(self.cities)):
             tmp_df = pd.read_csv(
-                self.base_path+'Dataframes/'+f'{self.cities[i]}.csv')
-
+                self.base_path+f'{self.cities[i]}.csv')
             # Now we add a prefix to place_id, so that we
             # don't confuse, say, place number 13 of NewYork
             # with place number 13 of London ==> (0000013 and 0500013)
