@@ -6,6 +6,8 @@ from PIL import Image
 import torch
 from torch.utils.data import Dataset
 import torchvision.transforms as T
+import  re
+import os
 
 default_transform = T.Compose([
     T.ToTensor(),
@@ -15,13 +17,14 @@ default_transform = T.Compose([
 # NOTE: Hard coded path to dataset folder 
 BASE_PATH = '/content/drive/MyDrive/geoloc_fcm/extracted_datasets/gsv_xs/train/'
 
+
 if not Path(BASE_PATH).exists():
     raise FileNotFoundError(
         'BASE_PATH is hardcoded, please adjust to point to gsv_cities')
 
 class GSVCitiesDataset(Dataset):
     def __init__(self,
-                 cities=['London', 'Boston'], #perchè solo queste due?
+                 cities=['buenosaires'], 
                  img_per_place=4,
                  min_img_per_place=4,
                  random_sample_from_each_place=True,
@@ -38,27 +41,20 @@ class GSVCitiesDataset(Dataset):
         self.min_img_per_place = min_img_per_place
         self.random_sample_from_each_place = random_sample_from_each_place
         self.transform = transform
-        
+
+
+        # è da scommentare?????
+    
         # generate the dataframe contraining images metadata
         self.dataframe = self.__getdataframes()
         
+
         # get all unique place ids
         self.places_ids = pd.unique(self.dataframe.index)
         self.total_nb_images = len(self.dataframe)
-    def imgTitleExtractor_():
-       
-        
-        pattern = r'@([^@]+)@'
 
 
-
-        text = '@0669394.88@1520993.59@47@P@013.75330@0100.56677@hgRRIc-rmtuqnLTx86BJDQ@@213@@@@201706@3385_Bangkok@.jpg'
-        text = text.replace('@','@@')
-        text = text.replace('_','@@')
-        matches = re.findall(pattern, text)
-        x= [matches[8][0:4],matches[8][4:],matches[9],matches[10]]
-        matches[0:8]+=x
-        matches[:12]
+  
         
     def __getdataframes(self):
         ''' 
@@ -78,6 +74,7 @@ class GSVCitiesDataset(Dataset):
         for i in range(1, len(self.cities)):
             tmp_df = pd.read_csv(
                 self.base_path+f'{self.cities[i]}.csv')
+
             # Now we add a prefix to place_id, so that we
             # don't confuse, say, place number 13 of NewYork
             # with place number 13 of London ==> (0000013 and 0500013)
@@ -142,6 +139,7 @@ class GSVCitiesDataset(Dataset):
 
     @staticmethod
     def get_img_name(row):
+        """ 
         # given a row from the dataframe
         # return the corresponding image name
 
@@ -160,3 +158,6 @@ class GSVCitiesDataset(Dataset):
         lat, lon = str(row['lat']), str(row['lon'])
         name = str(row['img_name'])
         return name
+        """
+        return row['img_name']
+        

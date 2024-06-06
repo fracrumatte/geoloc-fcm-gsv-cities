@@ -51,7 +51,7 @@ class GSVCitiesDataModule(pl.LightningDataModule):
                  img_per_place=4,
                  min_img_per_place=4,
                  shuffle_all=False,
-                 image_size=(480, 640),  #224, 224 ????
+                 image_size=(480, 640), #maybe update to 224 x 224
                  num_workers=4,
                  show_data_stats=True,
                  cities=TRAIN_CITIES,
