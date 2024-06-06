@@ -7,6 +7,7 @@ from dataloaders.val.PittsburghDataset import PittsburghDataset
 from dataloaders.val.MapillaryDataset import MSLS
 from dataloaders.val.NordlandDataset import NordlandDataset
 from dataloaders.val.SPEDDataset import SPEDDataset
+from dataloaders.val.SF_Dataset import SF_Dataset
 
 
 from prettytable import PrettyTable
@@ -57,7 +58,7 @@ class GSVCitiesDataModule(pl.LightningDataModule):
                  mean_std=IMAGENET_MEAN_STD,
                  batch_sampler=None,
                  random_sample_from_each_place=True,
-                 val_set_names=['pitts30k_val', 'msls_val']
+                 val_set_names=['sf_val']  #cambiare con dataset_sf_val ???
                  ):
         super().__init__()
         self.batch_size = batch_size
@@ -120,6 +121,9 @@ class GSVCitiesDataModule(pl.LightningDataModule):
                         input_transform=self.valid_transform))
                 elif valid_set_name.lower() == 'sped':
                     self.val_datasets.append(SPEDDataset(
+                        input_transform=self.valid_transform))
+                elif valid_set_name.lower() == 'sf_val':
+                    self.val_datasets.append(SF_Dataset(    
                         input_transform=self.valid_transform))
                 else:
                     print(

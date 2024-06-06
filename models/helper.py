@@ -3,10 +3,10 @@ from . import aggregators
 from . import backbones
 
 
-def get_backbone(backbone_arch='resnet50',
+def get_backbone(backbone_arch='resnet18',
                  pretrained=True,
                  layers_to_freeze=2,
-                 layers_to_crop=[],):
+                 layers_to_crop=[],):  
     """Helper function that returns the backbone given its name
 
     Args:
@@ -84,12 +84,17 @@ def main():
     
     x = torch.randn(1, 3, 224, 224) #random image
     # backbone = get_backbone(backbone_arch='resnet50')
-    backbone = get_backbone(backbone_arch='resnet50')
-    agg = get_aggregator('cosplace', {'in_dim':backbone.out_channels, 'out_dim':512})
+    backbone = get_backbone(backbone_arch='resnet18')
+    agg = get_aggregator('ConvAP', {'in_dim':backbone.out_channels, 'out_dim':1024})
     # agg = get_aggregator('GeM')
     print_nb_params(backbone)
     print_nb_params(agg)
     
+    for name, child in backbone.named_children():   #aggiungerlo nel main dell'helper
+            if name == "layer3":  # Freeze layers before conv_3
+                  break
+            for params in child.parameters():
+                  params.requires_grad = False
     backbone_output = backbone(x)
     agg_output = agg(backbone_output)
     print(f'output shape: {agg_output.shape}')

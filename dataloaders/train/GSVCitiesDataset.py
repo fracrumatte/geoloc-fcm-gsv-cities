@@ -156,8 +156,7 @@ class GSVCitiesDataset(Dataset):
         month = str(row['month']).zfill(2)
         northdeg = str(row['northdeg']).zfill(3)
         lat, lon = str(row['lat']), str(row['lon'])
-        name = city+'_'+pl_id+'_'+year+'_'+month+'_' + \
-            northdeg+'_'+lat+'_'+lon+'_'+panoid+'.jpg'
+        name = str(row['img_name'])
         return name
         """
         return row['img_name']
