@@ -114,8 +114,11 @@ class GSVCitiesDataset(Dataset):
         imgs = []
         for i, row in place.iterrows():
             img_name = self.get_img_name(row)
-            img_path = self.base_path + 'Images/' + \
-                row['city_id'] + '/' + img_name
+            #original img_path code
+            # img_path = self.base_path + 'Images/' + \
+            #     row['city_id'] + '/' + img_name
+
+            img_path = self.base_path +'/'+row['city_id']+'/'+img_name
             img = self.image_loader(img_path)
 
             if self.transform is not None:
@@ -155,6 +158,5 @@ class GSVCitiesDataset(Dataset):
         month = str(row['month']).zfill(2)
         northdeg = str(row['northdeg']).zfill(3)
         lat, lon = str(row['lat']), str(row['lon'])
-        name = city+'_'+pl_id+'_'+year+'_'+month+'_' + \
-            northdeg+'_'+lat+'_'+lon+'_'+panoid+'.jpg'
+        name = str(row['img_name'])
         return name

@@ -7,6 +7,7 @@ from dataloaders.val.PittsburghDataset import PittsburghDataset
 from dataloaders.val.MapillaryDataset import MSLS
 from dataloaders.val.NordlandDataset import NordlandDataset
 from dataloaders.val.SPEDDataset import SPEDDataset
+from dataloaders.val.SF_Dataset import SF_Dataset
 
 
 from prettytable import PrettyTable
@@ -122,7 +123,7 @@ class GSVCitiesDataModule(pl.LightningDataModule):
                     self.val_datasets.append(SPEDDataset(
                         input_transform=self.valid_transform))
                 elif valid_set_name.lower() == 'sf_val':
-                    self.val_datasets.append(SF_Dataset(    #aggiungere classe per SF in dataloaders/val (SfDataset.py)
+                    self.val_datasets.append(SF_Dataset(    
                         input_transform=self.valid_transform))
                 else:
                     print(
