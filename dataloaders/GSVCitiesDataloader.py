@@ -50,14 +50,14 @@ class GSVCitiesDataModule(pl.LightningDataModule):
                  img_per_place=4,
                  min_img_per_place=4,
                  shuffle_all=False,
-                 image_size=(480, 640),
+                 image_size=(480, 640),  #224, 224 ????
                  num_workers=4,
                  show_data_stats=True,
                  cities=TRAIN_CITIES,
                  mean_std=IMAGENET_MEAN_STD,
                  batch_sampler=None,
                  random_sample_from_each_place=True,
-                 val_set_names=['pitts30k_val', 'msls_val']
+                 val_set_names=['sf_val']  #cambiare con dataset_sf_val ???
                  ):
         super().__init__()
         self.batch_size = batch_size
@@ -120,6 +120,9 @@ class GSVCitiesDataModule(pl.LightningDataModule):
                         input_transform=self.valid_transform))
                 elif valid_set_name.lower() == 'sped':
                     self.val_datasets.append(SPEDDataset(
+                        input_transform=self.valid_transform))
+                elif valid_set_name.lower() == 'sf_val':
+                    self.val_datasets.append(SF_Dataset(    #aggiungere classe per SF in dataloaders/val (SfDataset.py)
                         input_transform=self.valid_transform))
                 else:
                     print(

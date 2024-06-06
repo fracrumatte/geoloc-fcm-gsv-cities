@@ -21,7 +21,7 @@ if not Path(BASE_PATH).exists():
 
 class GSVCitiesDataset(Dataset):
     def __init__(self,
-                 cities=['London', 'Boston'],
+                 cities=['London', 'Boston'], #perchè solo queste due?
                  img_per_place=4,
                  min_img_per_place=4,
                  random_sample_from_each_place=True,

@@ -18,7 +18,7 @@ class VPRModel(pl.LightningModule):
                 backbone_arch='resnet18',
                 pretrained=True,
                 layers_to_freeze=1,
-                layers_to_crop=[],
+                layers_to_crop=[4],
                 
                 #---- Aggregator
                 agg_arch='ConvAP', #CosPlace, NetVLAD, GeM, AVG
@@ -232,10 +232,10 @@ if __name__ == '__main__':
         # cities=['London', 'Boston', 'Melbourne'], # you can sppecify cities here or in GSVCitiesDataloader.py
         shuffle_all=False, # shuffle all images or keep shuffling in-city only
         random_sample_from_each_place=True,
-        image_size=(320, 320),
+        image_size=(320, 320),   #forse cambiare in 224, 224
         num_workers=8,
         show_data_stats=True,
-        val_set_names=['pitts30k_val', 'msls_val'], # pitts30k_val, pitts30k_test, msls_val, nordland, sped
+        val_set_names=['sf_val'], # pitts30k_val, pitts30k_test, msls_val, nordland, sped
     )
     
     # examples of backbones
@@ -246,16 +246,16 @@ if __name__ == '__main__':
     model = VPRModel(
         #-------------------------------
         #---- Backbone architecture ----
-        backbone_arch='resnet50',
+        backbone_arch='resnet18',
         pretrained=True,
         layers_to_freeze=2,
-        layers_to_crop=[], # 4 crops the last resnet layer, 3 crops the 3rd, ...etc
+        layers_to_crop=[4], # 4 crops the last resnet layer, 3 crops the 3rd, ...etc
         
         #---------------------
         #---- Aggregator -----
-        # agg_arch='CosPlace',
-        # agg_config={'in_dim': 512,
-        #             'out_dim': 512},
+        #agg_arch='CosPlace',
+        #agg_config={'in_dim': 512,
+         #            'out_dim': 512},
         # agg_arch='GeM',
         # agg_config={'p': 3},
         

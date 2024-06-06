@@ -84,8 +84,8 @@ def main():
     
     x = torch.randn(1, 3, 224, 224) #random image
     # backbone = get_backbone(backbone_arch='resnet50')
-    backbone = get_backbone(backbone_arch='resnet50')
-    agg = get_aggregator('cosplace', {'in_dim':backbone.out_channels, 'out_dim':512})
+    backbone = get_backbone(backbone_arch='resnet18')
+    agg = get_aggregator('ConvAP', {'in_dim':backbone.out_channels, 'out_dim':1024})
     # agg = get_aggregator('GeM')
     print_nb_params(backbone)
     print_nb_params(agg)
