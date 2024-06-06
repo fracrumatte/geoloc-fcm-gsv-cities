@@ -6,6 +6,8 @@ from PIL import Image
 import torch
 from torch.utils.data import Dataset
 import torchvision.transforms as T
+import  re
+import os
 
 default_transform = T.Compose([
     T.ToTensor(),
@@ -13,7 +15,8 @@ default_transform = T.Compose([
 ])
 
 # NOTE: Hard coded path to dataset folder 
-BASE_PATH = '/home/USER/work/datasets/gsv_cities/'
+BASE_PATH = '/content/drive/MyDrive/geoloc_fcm/extracted_datasets/gsv_xs/train/'
+
 
 if not Path(BASE_PATH).exists():
     raise FileNotFoundError(
@@ -21,7 +24,7 @@ if not Path(BASE_PATH).exists():
 
 class GSVCitiesDataset(Dataset):
     def __init__(self,
-                 cities=['London', 'Boston'],
+                 cities=['buenosaires'], 
                  img_per_place=4,
                  min_img_per_place=4,
                  random_sample_from_each_place=True,
@@ -38,13 +41,20 @@ class GSVCitiesDataset(Dataset):
         self.min_img_per_place = min_img_per_place
         self.random_sample_from_each_place = random_sample_from_each_place
         self.transform = transform
-        
+
+
+        # è da scommentare?????
+    
         # generate the dataframe contraining images metadata
         self.dataframe = self.__getdataframes()
         
+
         # get all unique place ids
         self.places_ids = pd.unique(self.dataframe.index)
         self.total_nb_images = len(self.dataframe)
+
+
+  
         
     def __getdataframes(self):
         ''' 
@@ -56,14 +66,14 @@ class GSVCitiesDataset(Dataset):
             for each city in self.cities
         '''
         # read the first city dataframe
-        df = pd.read_csv(self.base_path+'Dataframes/'+f'{self.cities[0]}.csv')
+        df = pd.read_csv(self.base_path+f'{self.cities[0]}.csv') 
         df = df.sample(frac=1)  # shuffle the city dataframe
         
 
         # append other cities one by one
         for i in range(1, len(self.cities)):
             tmp_df = pd.read_csv(
-                self.base_path+'Dataframes/'+f'{self.cities[i]}.csv')
+                self.base_path+f'{self.cities[i]}.csv')
 
             # Now we add a prefix to place_id, so that we
             # don't confuse, say, place number 13 of NewYork
@@ -101,8 +111,11 @@ class GSVCitiesDataset(Dataset):
         imgs = []
         for i, row in place.iterrows():
             img_name = self.get_img_name(row)
-            img_path = self.base_path + 'Images/' + \
-                row['city_id'] + '/' + img_name
+            #original img_path code
+            # img_path = self.base_path + 'Images/' + \
+            #     row['city_id'] + '/' + img_name
+
+            img_path = self.base_path +'/'+row['city_id']+'/'+img_name
             img = self.image_loader(img_path)
 
             if self.transform is not None:
@@ -126,6 +139,7 @@ class GSVCitiesDataset(Dataset):
 
     @staticmethod
     def get_img_name(row):
+        """ 
         # given a row from the dataframe
         # return the corresponding image name
 
@@ -145,3 +159,6 @@ class GSVCitiesDataset(Dataset):
         name = city+'_'+pl_id+'_'+year+'_'+month+'_' + \
             northdeg+'_'+lat+'_'+lon+'_'+panoid+'.jpg'
         return name
+        """
+        return row['img_name']
+        
