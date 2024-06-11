@@ -9,10 +9,10 @@ BASE_PATH = '/content/drive/MyDrive/geoloc_fcm/extracted_datasets/sf_xs/'
 
 
 
-DATASET_ROOT = '/home/USER/work/datasets/Pittsburgh/' 
-#DATASET_ROOT = 'C:\Users\Utente\.vscode\project\geoloc-fcm-gsv-cities\datasets\SanFrancisco'  questo è il mio path, va cambiato
-GT_ROOT = '/home/USER/work/gsv-cities/datasets/' # BECAREFUL, this is the ground truth that comes with GSV-Cities
-#GT_ROOT = C:\Users\Utente\.vscode\project\geoloc-fcm-gsv-cities\datasets    questo è il mio path, va cambiato
+# DATASET_ROOT = '/home/USER/work/datasets/Pittsburgh/' 
+DATASET_ROOT = 'geoloc-fcm-gsv-cities/datasets/SanFrancisco'  #questo è il mio path, va cambiato
+#GT_ROOT = '/home/USER/work/gsv-cities/datasets/' # BECAREFUL, this is the ground truth that comes with GSV-Cities
+GT_ROOT = 'geoloc-fcm-gsv-cities/datasets/SanFrancisco'    #questo è il mio path, va cambiato
 
 path_obj = Path(DATASET_ROOT)
 if not path_obj.exists():
@@ -22,7 +22,7 @@ if not path_obj.joinpath('ref') or not path_obj.joinpath('query'):
     raise Exception(f'Please make sure the directories query and ref are situated in the directory {DATASET_ROOT}')
 
 class SF_Dataset(Dataset):
-    def __init__(self, which_ds='sf_test', input_transform = None):
+    def __init__(self, which_ds='sf_val', input_transform = None):
         
         assert which_ds.lower() in ['sf_val', 'sf_test']
         
