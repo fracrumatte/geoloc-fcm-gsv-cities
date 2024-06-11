@@ -10,9 +10,9 @@ BASE_PATH = '/content/drive/MyDrive/geoloc_fcm/extracted_datasets/tokyo_xs/'
 
 
 # DATASET_ROOT = '/home/USER/work/datasets/Pittsburgh/' 
-DATASET_ROOT = '/content/drive/MyDrive/geoloc_fcm/geoloc-fcm-gsv-cities/datasets/Tokyo'  #questo è il mio path, va cambiato
+DATASET_ROOT = '/content/drive/MyDrive/geoloc_fcm/geoloc-fcm-gsv-cities/datasets/Tokyo'  
 #GT_ROOT = '/home/USER/work/gsv-cities/datasets/' # BECAREFUL, this is the ground truth that comes with GSV-Cities
-GT_ROOT = '/content/drive/MyDrive/geoloc_fcm/geoloc-fcm-gsv-cities/datasets/'    #questo è il mio path, va cambiato
+GT_ROOT = '/content/drive/MyDrive/geoloc_fcm/geoloc-fcm-gsv-cities/datasets/'  
 
 path_obj = Path(DATASET_ROOT)
 if not path_obj.exists():
