@@ -308,7 +308,7 @@ if __name__ == '__main__':
 
         num_sanity_val_steps=0, # runs N validation steps before stating training
         precision=16, # we use half precision to reduce  memory usage (and 2x speed on RTX)
-        max_epochs=30,
+        max_epochs=10,
         check_val_every_n_epoch=1, # run validation every epoch
         callbacks=[checkpoint_cb],# we run the checkpointing callback (you can add more)
         reload_dataloaders_every_n_epochs=1, # we reload the dataset to shuffle the order
