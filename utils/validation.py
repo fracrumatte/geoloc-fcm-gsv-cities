@@ -4,7 +4,7 @@ import faiss.contrib.torch_utils
 from prettytable import PrettyTable
 
 
-def get_validation_recalls(r_list, q_list, k_values, gt, print_results=True, faiss_gpu=False, dataset_name='dataset without name ?'):
+def get_validation_recalls(r_list, q_list, k_values, gt, print_results=True, faiss_gpu=False, dataset_name='sf_val'):
         
         embed_size = r_list.shape[1]
         if faiss_gpu:
