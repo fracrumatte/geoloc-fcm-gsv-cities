@@ -123,7 +123,7 @@ class GSVCitiesDataModule(pl.LightningDataModule):
                     self.val_datasets.append(SPEDDataset(
                         input_transform=self.valid_transform))
                 elif valid_set_name.lower() == 'sf_val':
-                    self.val_datasets.append(SF_Dataset(    
+                    self.val_datasets.append(SF_Dataset(which_ds=valid_set_name,    
                         input_transform=self.valid_transform))
                 else:
                     print(
