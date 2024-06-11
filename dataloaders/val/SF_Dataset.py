@@ -9,7 +9,7 @@ BASE_PATH = '/content/drive/MyDrive/geoloc_fcm/extracted_datasets/sf_xs/'
 
 
 
-DATASET_ROOT = '/content/drive/MyDrive/geoloc_fcm/geoloc-fcm-gsv-cities/datasets/SanFrancisco' #colab path 
+DATASET_ROOT = '/content/drive/MyDrive/geoloc_fcm/extracted_datasets/sf_xs/val/' #colab path 
 # DATASET_ROOT = 'geoloc-fcm-gsv-cities/datasets/SanFrancisco'  #local path
 GT_ROOT = '/content/drive/MyDrive/geoloc_fcm/geoloc-fcm-gsv-cities/datasets/' #colab path
 # GT_ROOT = 'geoloc-fcm-gsv-cities/datasets/SanFrancisco'    #local path
@@ -43,7 +43,7 @@ class SF_Dataset(Dataset):
         
         self.num_references = len(self.dbImages)
         self.num_queries = len(self.qImages)
-        
+
     def getDatasetRootPath(self,title):
         ds_db_path = Path(DATASET_ROOT+'/database/'+title+'.jpg')
         ds_q_path = Path(DATASET_ROOT+'/queries/'+title+'.jpg')
