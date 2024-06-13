@@ -73,7 +73,7 @@ class ResNet(nn.Module):
                 self.model.layer3.requires_grad_(False)
 
         # remove the avgpool and most importantly the fc layer
-        self.model.avgpool = None
+        self.model.avgpool = nn.AvgPool2d(7, stride=1)
         self.model.fc = None
 
         if 4 in layers_to_crop:
