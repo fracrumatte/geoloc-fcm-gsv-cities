@@ -54,7 +54,7 @@ class SF_Dataset(Dataset):
     
     def __getitem__(self, index):
 
-        ds_root_path= self.getDatasetRootPath(self.images[index])
+        ds_root_path= self.getDatasetRootPath(self.images[index][7])
         img = Image.open(ds_root_path)
 
         if self.input_transform:
