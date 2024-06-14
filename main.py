@@ -259,11 +259,14 @@ if __name__ == '__main__':
         # agg_arch='GeM',
         # agg_config={'p': 3},
         
-        agg_arch='ConvAP',
-        agg_config={'in_channels': 2048,
-                    'out_channels': 512,
-                    's1' : 2,
-                    's2' : 2},
+        # agg_arch='ConvAP',
+        # agg_config={'in_channels': 2048,
+        #             'out_channels': 512,
+        #             's1' : 2,
+        #             's2' : 2},
+
+        agg_arch='avg',
+        agg_config={},
 
         #-----------------------------------
         #---- Training hyperparameters -----
