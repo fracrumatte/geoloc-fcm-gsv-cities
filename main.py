@@ -261,7 +261,7 @@ if __name__ == '__main__':
         
         agg_arch='ConvAP',
         agg_config={'in_channels': 2048,
-                    'out_channels': 1024, #forse 512
+                    'out_channels': 1024,
                     's1' : 2,
                     's2' : 2},
 
@@ -304,7 +304,9 @@ if __name__ == '__main__':
     # we instanciate a trainer
     trainer = pl.Trainer(
         accelerator='gpu', devices=[0],
-        default_root_dir=f'./LOGS/{model.encoder_arch}', # Tensorflow can be used to viz 
+        
+        default_root_dir=f'./LOGS/{model.encoder_arch}',
+        # default_root_dir=f'./LOGS/{model.encoder_arch}', # Tensorflow can be used to viz 
 
         num_sanity_val_steps=0, # runs N validation steps before stating training
         precision=16, # we use half precision to reduce  memory usage (and 2x speed on RTX)
@@ -313,7 +315,7 @@ if __name__ == '__main__':
         callbacks=[checkpoint_cb],# we run the checkpointing callback (you can add more)
         reload_dataloaders_every_n_epochs=1, # we reload the dataset to shuffle the order
         log_every_n_steps=20,
-        #fast_dev_run=True # comment if you want to start training the network and saving checkpoints
+        fast_dev_run=True # comment if you want to start training the network and saving checkpoints
     )
 
     # we call the trainer, and give it the model and the datamodule

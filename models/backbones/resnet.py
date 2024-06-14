@@ -99,5 +99,5 @@ class ResNet(nn.Module):
             x = self.model.layer3(x)
         if self.model.layer4 is not None:
             x = self.model.layer4(x)
-        x = self.model.avgpool(x)
+        
         return x

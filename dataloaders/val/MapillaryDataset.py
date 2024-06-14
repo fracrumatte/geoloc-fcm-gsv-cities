@@ -6,8 +6,12 @@ import torch
 import numpy as np
 from PIL import Image
 
-DATASET_ROOT = '/home/USER/work/datasets/msls_val/'
-GT_ROOT = '/home/USER/work/gsv-cities/datasets/' # BECAREFUL, this is the ground truth that comes with GSV-Cities
+
+# DATASET_ROOT = '/home/USER/work/datasets/msls_val/' #local path
+DATASET_ROOT = '/content/drive/MyDrive/geoloc_fcm/geoloc-fcm-gsv-cities/datasets/msls_val/' #colab path
+# GT_ROOT = '/home/USER/work/gsv-cities/datasets/' #local path
+# BECAREFUL, this is the ground truth that comes with GSV-Cities
+GT_ROOT = '/content/drive/MyDrive/geoloc_fcm/geoloc-fcm-gsv-cities/datasets/' #colab path
 
 class MSLS(Dataset):
     def __init__(self, input_transform = None):
