@@ -62,6 +62,11 @@ def get_aggregator(agg_arch='ConvAP', agg_config={}):
     elif 'convap' in agg_arch.lower():
         assert 'in_channels' in agg_config
         return aggregators.ConvAP(**agg_config)
+    
+    elif 'avg' in agg_arch.lower():
+        return aggregators.AvgPool(**agg_config)
+    
+    
 
 
 
@@ -82,10 +87,10 @@ def print_nb_params(m):
 def main():
     import torch
     
-    x = torch.randn(1, 3, 224, 224) #random image
+    x = torch.randn(1, 3, 320, 320) #random image
     # backbone = get_backbone(backbone_arch='resnet50')
     backbone = get_backbone(backbone_arch='resnet18')
-    agg = get_aggregator('ConvAP', {'in_dim':backbone.out_channels, 'out_dim':1024})
+    agg = get_aggregator('avg', {'in_dim':backbone.out_channels, 'out_dim':1024})
     # agg = get_aggregator('GeM')
     print_nb_params(backbone)
     print_nb_params(agg)
