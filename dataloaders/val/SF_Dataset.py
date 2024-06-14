@@ -9,7 +9,7 @@ BASE_PATH = '/content/drive/MyDrive/geoloc_fcm/extracted_datasets/sf_xs/'
 
 
 
-DATASET_ROOT = '/content/drive/MyDrive/geoloc_fcm/extracted_datasets/sf_xs/val/' #colab path 
+DATASET_ROOT = '/content/drive/MyDrive/geoloc_fcm/extracted_datasets/sf_xs/val' #colab path 
 # DATASET_ROOT = 'geoloc-fcm-gsv-cities/datasets/SanFrancisco'  #local path
 GT_ROOT = '/content/drive/MyDrive/geoloc_fcm/geoloc-fcm-gsv-cities/datasets/' #colab path
 # GT_ROOT = 'geoloc-fcm-gsv-cities/datasets/SanFrancisco'    #local path
