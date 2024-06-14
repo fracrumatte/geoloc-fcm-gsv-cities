@@ -25,7 +25,7 @@ class ConvAP(nn.Module):
     
 
 if __name__ == '__main__':
-    x = torch.randn(4, 2048, 10, 10)
-    m = ConvAP(2048, 512)
+    x = torch.randn(4, 2048, 10, 10)  #batch size, canali input, dimensioni spaziali
+    m = ConvAP(2048, 512)  #canali input, canali output
     r = m(x)
     print(r.shape)
