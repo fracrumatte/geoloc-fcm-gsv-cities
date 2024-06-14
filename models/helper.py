@@ -64,7 +64,6 @@ def get_aggregator(agg_arch='ConvAP', agg_config={}):
         return aggregators.ConvAP(**agg_config)
     
     elif 'avg' in agg_arch.lower():
-        assert 'in_channels' in agg_config
         return aggregators.AvgPool(**agg_config)
     
     
