@@ -88,7 +88,7 @@ def print_nb_params(m):
 def main():
     import torch
     
-    x = torch.randn(1, 3, 224, 224) #random image
+    x = torch.randn(1, 3, 320, 320) #random image
     # backbone = get_backbone(backbone_arch='resnet50')
     backbone = get_backbone(backbone_arch='resnet18')
     agg = get_aggregator('avg', {'in_dim':backbone.out_channels, 'out_dim':1024})
