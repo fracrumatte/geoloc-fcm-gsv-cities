@@ -21,27 +21,29 @@ VIT_MEAN_STD = {'mean': [0.5, 0.5, 0.5],
 TRAIN_CITIES = [
     'bangkok',
     'buenosaires',
-    'losangeles',
-    'mexicocity',
-    'osl', # refers to Oslo
-    'rome',
-    'barcelona',
-    'chicago',
-    'madrid',
-    'miami',
-    'phoenix',
-    'trt', # refers to Toronto
-    'boston',
-    'lisbon',
-    'medellin',
-    'minneapolis',
-    'prg', # refers to Prague
-    'washingtondc',
-    'brussels',
-    'london',
-    'melbourne',
-    'osaka',
-    'prs', # refers to Paris
+
+    # 'losangeles',
+    # 'mexicocity',
+    # 'osl', # refers to Oslo
+    # 'rome',
+    # 'barcelona',
+    # 'chicago',
+    # 'madrid',
+    # 'miami',
+    # 'phoenix',
+    # 'trt', # refers to Toronto
+    # 'boston',
+    # 'lisbon',
+    # 'medellin',
+    # 'minneapolis',
+    # 'prg', # refers to Prague
+    # 'washingtondc',
+    # 'brussels',
+    # 'london',
+    # 'melbourne',
+    # 'osaka',
+    'prs' # refers to Paris
+
 ]
 
 
