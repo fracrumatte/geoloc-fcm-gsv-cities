@@ -15,7 +15,7 @@ default_transform = T.Compose([
 ])
 
 # NOTE: Hard coded path to dataset folder 
-BASE_PATH = '/content/drive/MyDrive/geoloc_fcm/extracted_datasets/gsv_xs/train/'
+BASE_PATH = '/content/drive/MyDrive/geoloc_fcm/extracted_datasets/gsv_xs/train'
 
 
 if not Path(BASE_PATH).exists():
@@ -115,7 +115,7 @@ class GSVCitiesDataset(Dataset):
             # img_path = self.base_path + 'Images/' + \
             #     row['city_id'] + '/' + img_name
 
-            img_path = self.base_path +'/'+row['city_id']+'/'+img_name
+            img_path = self.base_path +row['city_id'].lower()+'/'+img_name+'.jpg'
             img = self.image_loader(img_path)
 
             if self.transform is not None:
