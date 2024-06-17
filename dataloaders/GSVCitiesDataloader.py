@@ -19,7 +19,7 @@ VIT_MEAN_STD = {'mean': [0.5, 0.5, 0.5],
                 'std': [0.5, 0.5, 0.5]}
 
 TRAIN_CITIES = [
-    'bangkok',
+    # 'bangkok',
     'buenosaires',
 
     # 'losangeles',
@@ -42,7 +42,7 @@ TRAIN_CITIES = [
     # 'london',
     # 'melbourne',
     # 'osaka',
-    'prs' # refers to Paris
+    # 'prs' # refers to Paris
 
 ]
 
