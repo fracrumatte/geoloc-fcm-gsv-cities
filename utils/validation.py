@@ -9,8 +9,8 @@ def get_validation_recalls(r_list, q_list, k_values, gt, print_results=True, fai
         print(type(r_list))
         print(type(q_list))
         print(r_list)
-        r_list= np.array(r_list,dtype=float)
-        q_list= np.array(q_list,dtype=float)
+        r_list= np.array(r_list,dtype=np.float32)
+        q_list= np.array(q_list,dtype=np.float32)
 
 
         embed_size = r_list.shape[1]
