@@ -25,12 +25,12 @@ class VPRModel(pl.LightningModule):
                 agg_config={},
                 
                 #---- Train hyperparameters
-                lr=0.03, 
-                optimizer='sgd',
-                weight_decay=1e-3,
+                lr=0.0002, #0.03, sgd
+                optimizer='adam',
+                weight_decay= 0, #1e-3, sgd
                 momentum=0.9,
-                warmpup_steps=500,
-                milestones=[5, 10, 15],
+                warmpup_steps= 600,#500, sgd 
+                milestones=[5, 10, 15, 25],
                 lr_mult=0.3,
                 
                 #----- Loss
@@ -226,7 +226,7 @@ if __name__ == '__main__':
     # if you want to train on specific cities, you can comment/uncomment
     # cities from the list TRAIN_CITIES
     datamodule = GSVCitiesDataModule(
-        batch_size=100,
+        batch_size=32,
         img_per_place=4,
         min_img_per_place=4,
         # cities=['London', 'Boston', 'Melbourne'], # you can sppecify cities here or in GSVCitiesDataloader.py
