@@ -15,7 +15,7 @@ default_transform = T.Compose([
 ])
 
 # NOTE: Hard coded path to dataset folder 
-BASE_PATH = '/content/drive/MyDrive/geoloc_fcm/extracted_datasets/gsv_xs/train'
+BASE_PATH = '/content/drive/MyDrive/geoloc_fcm/extracted_datasets/gsv_xs/train/'
 
 
 if not Path(BASE_PATH).exists():
