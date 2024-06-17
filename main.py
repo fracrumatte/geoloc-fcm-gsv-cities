@@ -4,6 +4,7 @@ from pytorch_lightning.callbacks import ModelCheckpoint
 from torch.optim import lr_scheduler
 import utils
 
+
 from dataloaders.GSVCitiesDataloader import GSVCitiesDataModule
 from models import helper
 
@@ -200,6 +201,8 @@ class VPRModel(pl.LightningModule):
             # split to ref and queries    
             r_list = feats[ : num_references]
             q_list = feats[num_references : ]
+           
+
 
             recalls_dict, predictions = utils.get_validation_recalls(r_list=r_list, 
                                                 q_list=q_list,
