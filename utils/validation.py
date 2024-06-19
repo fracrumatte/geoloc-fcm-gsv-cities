@@ -6,9 +6,9 @@ from prettytable import PrettyTable
 
 def get_validation_recalls(r_list, q_list, k_values, gt, print_results=True, faiss_gpu=False, dataset_name='sf_val'):
         
-        print(type(r_list))
-        print(type(q_list))
-        print(r_list)
+        # print(type(r_list))
+        # print(type(q_list))
+        # print(r_list)
         r_list= np.array(r_list,dtype=np.float32)
         q_list= np.array(q_list,dtype=np.float32)
 

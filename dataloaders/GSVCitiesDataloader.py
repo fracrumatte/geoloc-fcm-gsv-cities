@@ -127,6 +127,12 @@ class GSVCitiesDataModule(pl.LightningDataModule):
                 elif valid_set_name.lower() == 'sf_val':
                     self.val_datasets.append(SF_Dataset(which_ds=valid_set_name,    
                         input_transform=self.valid_transform))
+                elif valid_set_name.lower() == 'sf_test':
+                    self.val_datasets.append(SF_Dataset(which_ds=valid_set_name,    
+                        input_transform=self.valid_transform))
+                elif valid_set_name.lower() == 'tokyo_test':
+                    self.val_datasets.append(SF_Dataset(which_ds=valid_set_name,    
+                        input_transform=self.valid_transform))
                 else:
                     print(
                         f'Validation set {valid_set_name} does not exist or has not been implemented yet')
