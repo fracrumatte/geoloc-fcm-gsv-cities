@@ -18,11 +18,11 @@ class VPRModel(pl.LightningModule):
                 #---- Backbone
                 backbone_arch='resnet18',
                 pretrained=True,
-                layers_to_freeze=1,
+                layers_to_freeze=2,
                 layers_to_crop=[4],
                 
                 #---- Aggregator
-                agg_arch='ConvAP', #CosPlace, NetVLAD, GeM, AVG
+                agg_arch='avg', #CosPlace, NetVLAD, GeM, ConvAP
                 agg_config={},
                 
                 #---- Train hyperparameters
@@ -313,7 +313,7 @@ if __name__ == '__main__':
     trainer = pl.Trainer(
         accelerator='gpu', devices=[0],
         
-        default_root_dir=f'./LOGS/{model.encoder_arch}',
+        default_root_dir=f'/content/drive/MyDrive/geoloc_fcm/LOGS/{model.encoder_arch}',
         # default_root_dir=f'./LOGS/{model.encoder_arch}', # Tensorflow can be used to viz 
 
         num_sanity_val_steps=0, # runs N validation steps before stating training
