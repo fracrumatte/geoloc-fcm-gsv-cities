@@ -51,7 +51,7 @@ class SF_Dataset(Dataset):
         test_q_path = Path(DATASET_ROOT+'/test'+'/queries/'+title+'.jpg')
         if ds_db_path.exists():
             return ds_db_path
-        elif ds_q_path.exist():
+        elif ds_q_path.exists():
             return ds_q_path
         elif test_db_path.exists():
             return   test_db_path
