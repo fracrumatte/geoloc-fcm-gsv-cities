@@ -115,7 +115,7 @@ class GSVCitiesDataset(Dataset):
             # img_path = self.base_path + 'Images/' + \
             #     row['city_id'] + '/' + img_name
 
-            img_path = self.base_path +'/'+row['city_id']+'/'+img_name
+            img_path = self.base_path +row['city_id'].lower()+'/'+img_name+'.jpg'
             img = self.image_loader(img_path)
 
             if self.transform is not None:

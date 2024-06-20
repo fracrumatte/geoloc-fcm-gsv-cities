@@ -22,9 +22,9 @@ if not path_obj.joinpath('ref') or not path_obj.joinpath('query'):
     raise Exception(f'Please make sure the directories query and ref are situated in the directory {DATASET_ROOT}')
 
 class Tokyo_Dataset(Dataset):
-    def __init__(self, which_ds='tokyo', input_transform = None):
+    def __init__(self, which_ds='tokyo_test', input_transform = None):
         
-        assert which_ds.lower() in ['tokyo']
+        assert which_ds.lower() in ['tokyo_test']
         
         self.input_transform = input_transform
 

@@ -9,7 +9,7 @@ BASE_PATH = '/content/drive/MyDrive/geoloc_fcm/extracted_datasets/sf_xs/'
 
 
 
-DATASET_ROOT = '/content/drive/MyDrive/geoloc_fcm/extracted_datasets/sf_xs/val' #colab path 
+DATASET_ROOT = '/content/drive/MyDrive/geoloc_fcm/extracted_datasets/sf_xs/' #colab path 
 # DATASET_ROOT = 'geoloc-fcm-gsv-cities/datasets/SanFrancisco'  #local path
 GT_ROOT = '/content/drive/MyDrive/geoloc_fcm/geoloc-fcm-gsv-cities/datasets/' #colab path
 # GT_ROOT = 'geoloc-fcm-gsv-cities/datasets/SanFrancisco'    #local path
@@ -43,7 +43,20 @@ class SF_Dataset(Dataset):
         
         self.num_references = len(self.dbImages)
         self.num_queries = len(self.qImages)
-        
+
+    def getDatasetRootPath(self,title):
+        ds_db_path = Path(DATASET_ROOT+'/val'+'/database/'+title+'.jpg')
+        ds_q_path = Path(DATASET_ROOT+'/val'+'/queries/'+title+'.jpg')
+        test_db_path = Path(DATASET_ROOT+'/test'+'/database/'+title+'.jpg')
+        test_q_path = Path(DATASET_ROOT+'/test'+'/queries/'+title+'.jpg')
+        if ds_db_path.exists():
+            return ds_db_path
+        elif ds_q_path.exists():
+            return ds_q_path
+        elif test_db_path.exists():
+            return   test_db_path
+        else:
+            return test_q_path
     
     def __getitem__(self, index):
         img = Image.open(DATASET_ROOT+self.images[index])

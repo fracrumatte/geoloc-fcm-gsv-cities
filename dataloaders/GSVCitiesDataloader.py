@@ -22,26 +22,26 @@ TRAIN_CITIES = [
     'bangkok',
     'buenosaires',
 
-    # 'losangeles',
-    # 'mexicocity',
-    # 'osl', # refers to Oslo
-    # 'rome',
-    # 'barcelona',
-    # 'chicago',
-    # 'madrid',
-    # 'miami',
-    # 'phoenix',
-    # 'trt', # refers to Toronto
-    # 'boston',
-    # 'lisbon',
-    # 'medellin',
-    # 'minneapolis',
-    # 'prg', # refers to Prague
-    # 'washingtondc',
-    # 'brussels',
-    # 'london',
-    # 'melbourne',
-    # 'osaka',
+    'losangeles',
+    'mexicocity',
+    'osl', # refers to Oslo
+    'rome',
+    'barcelona',
+    'chicago',
+    'madrid',
+    'miami',
+    'phoenix',
+    'trt', # refers to Toronto
+    'boston',
+    'lisbon',
+    'medellin',
+    'minneapolis',
+    'prg', # refers to Prague
+    'washingtondc',
+    'brussels',
+    'london',
+    'melbourne',
+    'osaka',
     'prs' # refers to Paris
 
 ]
@@ -125,6 +125,12 @@ class GSVCitiesDataModule(pl.LightningDataModule):
                     self.val_datasets.append(SPEDDataset(
                         input_transform=self.valid_transform))
                 elif valid_set_name.lower() == 'sf_val':
+                    self.val_datasets.append(SF_Dataset(which_ds=valid_set_name,    
+                        input_transform=self.valid_transform))
+                elif valid_set_name.lower() == 'sf_test':
+                    self.val_datasets.append(SF_Dataset(which_ds=valid_set_name,    
+                        input_transform=self.valid_transform))
+                elif valid_set_name.lower() == 'tokyo_test':
                     self.val_datasets.append(SF_Dataset(which_ds=valid_set_name,    
                         input_transform=self.valid_transform))
                 else:

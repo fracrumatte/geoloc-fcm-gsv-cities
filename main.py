@@ -4,6 +4,7 @@ from pytorch_lightning.callbacks import ModelCheckpoint
 from torch.optim import lr_scheduler
 import utils
 
+
 from dataloaders.GSVCitiesDataloader import GSVCitiesDataModule
 from models import helper
 
@@ -17,20 +18,20 @@ class VPRModel(pl.LightningModule):
                 #---- Backbone
                 backbone_arch='resnet18',
                 pretrained=True,
-                layers_to_freeze=1,
+                layers_to_freeze=2,
                 layers_to_crop=[4],
                 
                 #---- Aggregator
-                agg_arch='ConvAP', #CosPlace, NetVLAD, GeM, AVG
+                agg_arch='avg', #CosPlace, NetVLAD, GeM, ConvAP
                 agg_config={},
                 
                 #---- Train hyperparameters
-                lr=0.03, 
-                optimizer='sgd',
-                weight_decay=1e-3,
+                lr=0.0002, #0.03, sgd
+                optimizer='adam',
+                weight_decay= 0, #1e-3, sgd
                 momentum=0.9,
-                warmpup_steps=500,
-                milestones=[5, 10, 15],
+                warmpup_steps= 600,#500, sgd 
+                milestones=[5, 10, 15, 25],
                 lr_mult=0.3,
                 
                 #----- Loss
@@ -200,6 +201,8 @@ class VPRModel(pl.LightningModule):
             # split to ref and queries    
             r_list = feats[ : num_references]
             q_list = feats[num_references : ]
+           
+
 
             recalls_dict, predictions = utils.get_validation_recalls(r_list=r_list, 
                                                 q_list=q_list,
@@ -226,7 +229,7 @@ if __name__ == '__main__':
     # if you want to train on specific cities, you can comment/uncomment
     # cities from the list TRAIN_CITIES
     datamodule = GSVCitiesDataModule(
-        batch_size=100,
+        batch_size=32,
         img_per_place=4,
         min_img_per_place=4,
         # cities=['London', 'Boston', 'Melbourne'], # you can sppecify cities here or in GSVCitiesDataloader.py
@@ -310,7 +313,7 @@ if __name__ == '__main__':
     trainer = pl.Trainer(
         accelerator='gpu', devices=[0],
         
-        default_root_dir=f'./LOGS/{model.encoder_arch}',
+        default_root_dir=f'/content/drive/MyDrive/geoloc_fcm/LOGS/{model.encoder_arch}',
         # default_root_dir=f'./LOGS/{model.encoder_arch}', # Tensorflow can be used to viz 
 
         num_sanity_val_steps=0, # runs N validation steps before stating training
