@@ -35,7 +35,7 @@ class Tokyo_Dataset(Dataset):
         self.qImages = np.load(GT_ROOT+f'Tokyo/{which_ds}_qImages.npy', allow_pickle=True)
         
         # ground truth
-        self.ground_truth = np.load(GT_ROOT+f'Tokyo/{which_ds}_gt.npy', allow_pickle=True)
+        self.ground_truth = np.load(GT_ROOT+f'Tokyo/{which_ds}_gt_prova.npy', allow_pickle=True)
         
         # reference images then query images
         self.images = np.concatenate((self.dbImages, self.qImages))
