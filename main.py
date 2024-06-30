@@ -22,8 +22,8 @@ class VPRModel(pl.LightningModule):
                 layers_to_crop=[4],
                 
                 #---- Aggregator
-                agg_arch='avg', #CosPlace, NetVLAD, GeM, ConvAP
-                agg_config={},
+                agg_arch='GeM', #CosPlace, NetVLAD, avg, ConvAP
+                agg_config={'p': 3},
                 
                 #---- Train hyperparameters
                 lr=0.0002, #0.03, sgd
@@ -259,8 +259,8 @@ if __name__ == '__main__':
         #agg_arch='CosPlace',
         #agg_config={'in_dim': 512,
          #            'out_dim': 512},
-        # agg_arch='GeM',
-        # agg_config={'p': 3},
+        agg_arch='GeM',
+        agg_config={'p': 3},
         
 
         # agg_arch='ConvAP',
@@ -269,8 +269,8 @@ if __name__ == '__main__':
         #             's1' : 2,
         #             's2' : 2},
 
-        agg_arch='avg',
-        agg_config={},
+        # agg_arch='avg',
+        # agg_config={},
 
 
         #-----------------------------------
