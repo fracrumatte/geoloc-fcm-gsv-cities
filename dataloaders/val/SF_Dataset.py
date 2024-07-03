@@ -21,12 +21,12 @@ if not path_obj.exists():
 
 if not path_obj.joinpath('ref') or not path_obj.joinpath('query'):
     raise Exception(f'Please make sure the directories query and ref are situated in the directory {DATASET_ROOT}')
-
+current_ds=''
 class SF_Dataset(Dataset):
+    
     def __init__(self, which_ds='sf_val', input_transform = None):
         
         assert which_ds.lower() in ['sf_val', 'sf_test']
-        
         self.input_transform = input_transform
 
         # reference images names
@@ -55,7 +55,7 @@ class SF_Dataset(Dataset):
             return ds_q_path
         elif test_db_path.exists():
             return   test_db_path
-        else:
+        elif test_q_path.exists():
             return test_q_path
     
     def __getitem__(self, index):

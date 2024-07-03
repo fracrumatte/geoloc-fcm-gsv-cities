@@ -11,4 +11,4 @@ class AvgPool(nn.Module):
     def forward(self, x):
         x = self.AAP(x)
         x = torch.flatten(x, 1)  # Flatten to [batch_size, num_features]
-        return x
+        return F.normalize(x, p=2, dim=1)

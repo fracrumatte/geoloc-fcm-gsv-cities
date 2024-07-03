@@ -10,7 +10,8 @@ BASE_PATH = '/content/drive/MyDrive/geoloc_fcm/extracted_datasets/tokyo_xs/'
 
 
 # DATASET_ROOT = '/home/USER/work/datasets/Pittsburgh/' 
-DATASET_ROOT = '/content/drive/MyDrive/geoloc_fcm/geoloc-fcm-gsv-cities/datasets/Tokyo'  
+DATASET_ROOT = '/content/drive/MyDrive/geoloc_fcm/extracted_datasets/tokyo_xs/test'
+# DATASET_ROOT = '/content/drive/MyDrive/geoloc_fcm/geoloc-fcm-gsv-cities/datasets/tokyo_xs/test'  
 #GT_ROOT = '/home/USER/work/gsv-cities/datasets/' # BECAREFUL, this is the ground truth that comes with GSV-Cities
 GT_ROOT = '/content/drive/MyDrive/geoloc_fcm/geoloc-fcm-gsv-cities/datasets/'  
 
@@ -29,10 +30,10 @@ class Tokyo_Dataset(Dataset):
         self.input_transform = input_transform
 
         # reference images names
-        self.dbImages = np.load(GT_ROOT+f'Tokyo/{which_ds}_dbImages.npy')    
+        self.dbImages = np.load(GT_ROOT+f'Tokyo/{which_ds}_dbImages.npy', allow_pickle=True)    
         
         # query images names
-        self.qImages = np.load(GT_ROOT+f'Tokyo/{which_ds}_qImages.npy')
+        self.qImages = np.load(GT_ROOT+f'Tokyo/{which_ds}_qImages.npy', allow_pickle=True)
         
         # ground truth
         self.ground_truth = np.load(GT_ROOT+f'Tokyo/{which_ds}_gt.npy', allow_pickle=True)
@@ -42,10 +43,22 @@ class Tokyo_Dataset(Dataset):
         
         self.num_references = len(self.dbImages)
         self.num_queries = len(self.qImages)
+
+    def getDatasetRootPath(self,title):
+        ds_db_path = Path(DATASET_ROOT+'/database/'+title+'.jpg')
+        ds_q_path = Path(DATASET_ROOT+'/queries/'+title+'.jpg')
+        if ds_db_path.exists():
+            return ds_db_path
+        elif ds_q_path.exists():
+            return ds_q_path
         
     
     def __getitem__(self, index):
-        img = Image.open(DATASET_ROOT+self.images[index])
+
+        ds_root_path= self.getDatasetRootPath(self.images[index][8])
+        img = Image.open(ds_root_path)
+
+        # img = Image.open(DATASET_ROOT+self.images[index][7])
 
         if self.input_transform:
             img = self.input_transform(img)
