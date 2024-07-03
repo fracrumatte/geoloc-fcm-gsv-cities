@@ -21,12 +21,12 @@ class VPRModel(pl.LightningModule):
                 layers_to_crop=[4],
                 
                 #---- Aggregator
-                agg_arch='ConvAP', #CosPlace, NetVLAD, GeM, AVG
+                agg_arch='GeM', #CosPlace, NetVLAD, GeM, AVG
                 agg_config={},
                 
                 #---- Train hyperparameters
                 lr=0.03, 
-                optimizer='sgd',
+                optimizer='adam',
                 weight_decay=1e-3,
                 momentum=0.9,
                 warmpup_steps=500,
