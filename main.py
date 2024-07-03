@@ -92,7 +92,7 @@ class VPRModel(pl.LightningModule):
                                         lr=self.lr, 
                                         weight_decay=self.weight_decay)
         elif self.optimizer.lower() == 'adam':
-            optimizer = torch.optim.AdamW(self.parameters(), 
+            optimizer = torch.optim.Adam(self.parameters(), 
                                         lr=self.lr, 
                                         weight_decay=self.weight_decay)
         else:
