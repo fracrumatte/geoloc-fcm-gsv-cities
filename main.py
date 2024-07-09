@@ -262,7 +262,7 @@ if __name__ == '__main__':
         # agg_arch='GeM',
         # agg_config={'p': 3},
 
-         agg_arch='MixVPR',
+        agg_arch='MixVPR',
         agg_config={'in_channels' : 1024,
                 'in_h' : 20,
                 'in_w' : 20,
