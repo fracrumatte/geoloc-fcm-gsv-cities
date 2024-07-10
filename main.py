@@ -239,7 +239,7 @@ if __name__ == '__main__':
         batch_size=32,
         img_per_place=4,
         min_img_per_place=4,
-        cities=['London'], # you can sppecify cities here or in GSVCitiesDataloader.py
+        #cities=['London'], # you can sppecify cities here or in GSVCitiesDataloader.py
         shuffle_all=False, # shuffle all images or keep shuffling in-city only
         random_sample_from_each_place=True,
         image_size=(320, 320),   #forse cambiare in 224, 224
