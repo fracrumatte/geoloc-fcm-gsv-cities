@@ -99,7 +99,9 @@ class VPRModel(pl.LightningModule):
             raise ValueError(f'Optimizer {self.optimizer} has not been added to "configure_optimizers()"')
         # scheduler = lr_scheduler.MultiStepLR(optimizer, milestones=self.milestones, gamma=self.lr_mult)
         
-        scheduler = lr_scheduler.ReduceLROnPlateau(optimizer, 'min',patience=0)
+        #scheduler = lr_scheduler.ReduceLROnPlateau(optimizer, 'min',patience=0)
+        #return {'optimizer': optimizer, 'scheduler':scheduler,'monitor':"loss"}
+        scheduler = torch.optim.lr_scheduler.CosineAnnealingLR(optimizer, T_max=10, eta_min=0)
 
         return [optimizer], [scheduler]
     
