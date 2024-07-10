@@ -99,11 +99,11 @@ class VPRModel(pl.LightningModule):
             raise ValueError(f'Optimizer {self.optimizer} has not been added to "configure_optimizers()"')
         # scheduler = lr_scheduler.MultiStepLR(optimizer, milestones=self.milestones, gamma=self.lr_mult)
         
-        #scheduler = lr_scheduler.ReduceLROnPlateau(optimizer, 'min',patience=0)
-        #return {'optimizer': optimizer, 'scheduler':scheduler,'monitor':"loss"}
-        scheduler = torch.optim.lr_scheduler.CosineAnnealingLR(optimizer, T_max=10, eta_min=0)
+        scheduler = lr_scheduler.ReduceLROnPlateau(optimizer, 'min',patience=0)
+        return {'optimizer': optimizer, 'scheduler':scheduler,'monitor':"loss"}
+        # scheduler = torch.optim.lr_scheduler.CosineAnnealingLR(optimizer, T_max=10, eta_min=0)
 
-        return [optimizer], [scheduler]
+        # return [optimizer], [scheduler]
     
     # configure the optizer step, takes into account the warmup stage
     def optimizer_step(self,  epoch, batch_idx,
@@ -147,6 +147,7 @@ class VPRModel(pl.LightningModule):
                 len(self.batch_acc), prog_bar=True, logger=True)
         return loss
     
+    losses=[]
     # This is the training step that's executed at each iteration
     def training_step(self, batch, batch_idx):
         places, labels = batch
@@ -164,6 +165,7 @@ class VPRModel(pl.LightningModule):
         loss = self.loss_function(descriptors, labels) # Call the loss_function we defined above
         
         self.log('loss', loss.item(), logger=True)
+        self.losses.append(loss)
         return {'loss': loss}
     
     # This is called at the end of eatch training epoch
