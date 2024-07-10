@@ -262,6 +262,7 @@ if __name__ == '__main__':
         # agg_arch='GeM',
         # agg_config={'p': 3},
 
+
         agg_arch='MixVPR',
         agg_config={'in_channels' : 256,
                 'in_h' : 20,
@@ -271,14 +272,24 @@ if __name__ == '__main__':
                 'mlp_ratio' : 1,
                 'out_rows' : 4}, # the output dim will be (out_rows * out_channels)
 
+        #agg_arch='MixVPR',
+        #agg_config={'in_channels' : 1024,
+        #       'in_h' : 20,
+        #       'in_w' : 20,
+        #       'out_channels' : 1024,
+        #        'mix_depth' : 4,
+        #        'mlp_ratio' : 1,
+        #        'out_rows' : 4}, # the output dim will be (out_rows * out_channels)
+
+
         # agg_arch='ConvAP',
         # agg_config={'in_channels': 2048,
         #             'out_channels': 512,
         #             's1' : 2,
         #             's2' : 2},
 
-        # agg_arch='avg',
-        # agg_config={},
+#         agg_arch='avg',
+#         agg_config={},
 
 
         #-----------------------------------
