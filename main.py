@@ -97,8 +97,13 @@ class VPRModel(pl.LightningModule):
                                         weight_decay=self.weight_decay)
         else:
             raise ValueError(f'Optimizer {self.optimizer} has not been added to "configure_optimizers()"')
-        scheduler = lr_scheduler.MultiStepLR(optimizer, milestones=self.milestones, gamma=self.lr_mult)
-        return [optimizer], [scheduler]
+         scheduler = lr_scheduler.MultiStepLR(optimizer, milestones=self.milestones, gamma=self.lr_mult)
+        
+        #scheduler = lr_scheduler.ReduceLROnPlateau(optimizer, 'min',patience=0)
+        #return {'optimizer': optimizer, 'scheduler':scheduler,'monitor':"loss"}
+        # scheduler = torch.optim.lr_scheduler.CosineAnnealingLR(optimizer, T_max=10, eta_min=0)
+
+         return [optimizer], [scheduler]
     
     # configure the optizer step, takes into account the warmup stage
     def optimizer_step(self,  epoch, batch_idx,
@@ -142,6 +147,7 @@ class VPRModel(pl.LightningModule):
                 len(self.batch_acc), prog_bar=True, logger=True)
         return loss
     
+
     all_losses=[]
     losses=[]
     # This is the training step that's executed at each iteration
@@ -238,7 +244,7 @@ if __name__ == '__main__':
         batch_size=32,
         img_per_place=4,
         min_img_per_place=4,
-        # cities=['London', 'Boston', 'Melbourne'], # you can sppecify cities here or in GSVCitiesDataloader.py
+        #cities=['London'], # you can sppecify cities here or in GSVCitiesDataloader.py
         shuffle_all=False, # shuffle all images or keep shuffling in-city only
         random_sample_from_each_place=True,
         image_size=(320, 320),   #forse cambiare in 224, 224
@@ -267,7 +273,26 @@ if __name__ == '__main__':
          #            'out_dim': 512},
         agg_arch='GeM',
         agg_config={'p': 3},
-        
+
+
+        #agg_arch='MixVPR',
+        #agg_config={'in_channels' : 256,
+        #        'in_h' : 20,
+        #        'in_w' : 20,
+        #        'out_channels' : 256,
+        #        'mix_depth' : 4,
+        #        'mlp_ratio' : 1,
+        #        'out_rows' : 4}, # the output dim will be (out_rows * out_channels)
+
+        #agg_arch='MixVPR',
+        #agg_config={'in_channels' : 1024,
+        #       'in_h' : 20,
+        #       'in_w' : 20,
+        #       'out_channels' : 1024,
+        #        'mix_depth' : 4,
+        #        'mlp_ratio' : 1,
+        #        'out_rows' : 4}, # the output dim will be (out_rows * out_channels)
+
 
         # agg_arch='ConvAP',
         # agg_config={'in_channels': 2048,
@@ -275,16 +300,16 @@ if __name__ == '__main__':
         #             's1' : 2,
         #             's2' : 2},
 
-        # agg_arch='avg',
-        # agg_config={},
+#         agg_arch='avg',
+#         agg_config={},
 
 
         #-----------------------------------
         #---- Training hyperparameters -----
         #
-        lr=0.0002, # 0.03 for sgd
-        optimizer='adam', # sgd, adam or adamw
-        weight_decay=0, # 0.001 for sgd or 0.0 for adam
+        lr=0.0002, # 0.03 for sgd , for adam 0.0002
+        optimizer='adamw', # sgd, adam or adamw
+        weight_decay=0.0, # 0.001 for sgd or 0.0 for adam
         momentum=0.9,
         warmpup_steps=600,
         milestones=[5, 10, 15, 25],
