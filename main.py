@@ -97,7 +97,8 @@ class VPRModel(pl.LightningModule):
                                         weight_decay=self.weight_decay)
         else:
             raise ValueError(f'Optimizer {self.optimizer} has not been added to "configure_optimizers()"')
-         scheduler = lr_scheduler.MultiStepLR(optimizer, milestones=self.milestones, gamma=self.lr_mult)
+            
+        scheduler = lr_scheduler.MultiStepLR(optimizer, milestones=self.milestones, gamma=self.lr_mult)
         
         #scheduler = lr_scheduler.ReduceLROnPlateau(optimizer, 'min',patience=0)
         #return {'optimizer': optimizer, 'scheduler':scheduler,'monitor':"loss"}
