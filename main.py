@@ -104,7 +104,7 @@ class VPRModel(pl.LightningModule):
         #return {'optimizer': optimizer, 'scheduler':scheduler,'monitor':"loss"}
         # scheduler = torch.optim.lr_scheduler.CosineAnnealingLR(optimizer, T_max=10, eta_min=0)
 
-         return [optimizer], [scheduler]
+        return [optimizer], [scheduler]
     
     # configure the optizer step, takes into account the warmup stage
     def optimizer_step(self,  epoch, batch_idx,
