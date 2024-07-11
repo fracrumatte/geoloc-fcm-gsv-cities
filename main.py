@@ -266,18 +266,18 @@ if __name__ == '__main__':
         #agg_arch='CosPlace',
         #agg_config={'in_dim': 512,
          #            'out_dim': 512},
-        # agg_arch='GeM',
-        # agg_config={'p': 3},
+        agg_arch='GeM',
+        agg_config={'p': 3},
 
 
-        agg_arch='MixVPR',
-        agg_config={'in_channels' : 256,
-                'in_h' : 20,
-                'in_w' : 20,
-                'out_channels' : 256,
-                'mix_depth' : 4,
-                'mlp_ratio' : 1,
-                'out_rows' : 4}, # the output dim will be (out_rows * out_channels)
+        #agg_arch='MixVPR',
+        #agg_config={'in_channels' : 256,
+        #        'in_h' : 20,
+        #        'in_w' : 20,
+        #        'out_channels' : 256,
+        #        'mix_depth' : 4,
+        #        'mlp_ratio' : 1,
+        #        'out_rows' : 4}, # the output dim will be (out_rows * out_channels)
 
         #agg_arch='MixVPR',
         #agg_config={'in_channels' : 1024,
