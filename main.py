@@ -97,13 +97,13 @@ class VPRModel(pl.LightningModule):
                                         weight_decay=self.weight_decay)
         else:
             raise ValueError(f'Optimizer {self.optimizer} has not been added to "configure_optimizers()"')
-        # scheduler = lr_scheduler.MultiStepLR(optimizer, milestones=self.milestones, gamma=self.lr_mult)
+         scheduler = lr_scheduler.MultiStepLR(optimizer, milestones=self.milestones, gamma=self.lr_mult)
         
-        scheduler = lr_scheduler.ReduceLROnPlateau(optimizer, 'min',patience=0)
-        return {'optimizer': optimizer, 'scheduler':scheduler,'monitor':"loss"}
+        #scheduler = lr_scheduler.ReduceLROnPlateau(optimizer, 'min',patience=0)
+        #return {'optimizer': optimizer, 'scheduler':scheduler,'monitor':"loss"}
         # scheduler = torch.optim.lr_scheduler.CosineAnnealingLR(optimizer, T_max=10, eta_min=0)
 
-        # return [optimizer], [scheduler]
+         return [optimizer], [scheduler]
     
     # configure the optizer step, takes into account the warmup stage
     def optimizer_step(self,  epoch, batch_idx,
@@ -147,6 +147,8 @@ class VPRModel(pl.LightningModule):
                 len(self.batch_acc), prog_bar=True, logger=True)
         return loss
     
+
+    all_losses=[]
     losses=[]
     # This is the training step that's executed at each iteration
     def training_step(self, batch, batch_idx):
@@ -172,6 +174,8 @@ class VPRModel(pl.LightningModule):
     def training_epoch_end(self, training_step_outputs):
         # we empty the batch_acc list for next epoch
         self.batch_acc = []
+        self.all_losses.append(self.losses)
+        self.losses=[]
 
     # For validation, we will also iterate step by step over the validation set
     # this is the way Pytorch Lghtning is made. All about modularity, folks.
@@ -224,6 +228,7 @@ class VPRModel(pl.LightningModule):
             self.log(f'{val_set_name}/R1', recalls_dict[1], prog_bar=False, logger=True)
             self.log(f'{val_set_name}/R5', recalls_dict[5], prog_bar=False, logger=True)
             self.log(f'{val_set_name}/R10', recalls_dict[10], prog_bar=False, logger=True)
+            self.log('all_losses', self.all_losses, prog_bar=False, logger=True)
         print('\n\n')
             
             
@@ -302,9 +307,9 @@ if __name__ == '__main__':
         #-----------------------------------
         #---- Training hyperparameters -----
         #
-        lr=0.03, #  for sgd , for adam 0.0002
-        optimizer='sgd', # sgd, adam or adamw
-        weight_decay=0, # 0.001 for sgd or 0.0 for adam
+        lr=0.0002, # 0.03 for sgd , for adam 0.0002
+        optimizer='adamw', # sgd, adam or adamw
+        weight_decay=0.0, # 0.001 for sgd or 0.0 for adam
         momentum=0.9,
         warmpup_steps=600,
         milestones=[5, 10, 15, 25],
