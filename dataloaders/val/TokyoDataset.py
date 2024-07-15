@@ -5,13 +5,7 @@ import pandas as pd
 from torch.utils.data import Dataset
 
 BASE_PATH = '/content/drive/MyDrive/geoloc_fcm/extracted_datasets/tokyo_xs/'
-
-
-
-
-# DATASET_ROOT = '/home/USER/work/datasets/Pittsburgh/' 
 DATASET_ROOT = '/content/drive/MyDrive/geoloc_fcm/extracted_datasets/tokyo_xs/test'  
-#GT_ROOT = '/home/USER/work/gsv-cities/datasets/' # BECAREFUL, this is the ground truth that comes with GSV-Cities
 GT_ROOT = '/content/drive/MyDrive/geoloc_fcm/geoloc-fcm-gsv-cities/datasets/'  
 
 path_obj = Path(DATASET_ROOT)
@@ -52,7 +46,6 @@ class Tokyo_Dataset(Dataset):
             return ds_q_path  
     
     def __getitem__(self, index):
-        #img = Image.open(DATASET_ROOT+'/'+self.images[index][8])
         ds_root_path= self.getDatasetRootPath(self.images[index][8])
         img = Image.open(ds_root_path)
 
