@@ -22,8 +22,8 @@ class VPRModel(pl.LightningModule):
                 layers_to_crop=[4],
                 
                 #---- Aggregator
-                agg_arch='GeM', #CosPlace, NetVLAD, avg, ConvAP
-                agg_config={'p': 3},
+                agg_arch='ConvAP', #GEM, avg, ConvAP, mixVPR
+                agg_config={},
                 
                 #---- Train hyperparameters
                 lr=0.0002, #0.03, sgd
@@ -245,13 +245,12 @@ if __name__ == '__main__':
         batch_size=32,
         img_per_place=4,
         min_img_per_place=4,
-        #cities=['London'], # you can sppecify cities here or in GSVCitiesDataloader.py
         shuffle_all=False, # shuffle all images or keep shuffling in-city only
         random_sample_from_each_place=True,
         image_size=(320, 320),   #forse cambiare in 224, 224
         num_workers=8,
         show_data_stats=True,
-        val_set_names=['sf_val'], # pitts30k_val, pitts30k_test, msls_val, nordland, sped
+        val_set_names=['sf_val'], 
     )
     
     # examples of backbones
@@ -269,11 +268,9 @@ if __name__ == '__main__':
         
         #---------------------
         #---- Aggregator -----
-        #agg_arch='CosPlace',
-        #agg_config={'in_dim': 512,
-         #            'out_dim': 512},
-        agg_arch='GeM',
-        agg_config={'p': 3},
+        
+        #agg_arch='GeM',
+        #agg_config={'p': 3},
 
 
         #agg_arch='MixVPR',
@@ -285,21 +282,14 @@ if __name__ == '__main__':
         #        'mlp_ratio' : 1,
         #        'out_rows' : 4}, # the output dim will be (out_rows * out_channels)
 
-        #agg_arch='MixVPR',
-        #agg_config={'in_channels' : 1024,
-        #       'in_h' : 20,
-        #       'in_w' : 20,
-        #       'out_channels' : 1024,
-        #        'mix_depth' : 4,
-        #        'mlp_ratio' : 1,
-        #        'out_rows' : 4}, # the output dim will be (out_rows * out_channels)
+        
 
 
-        # agg_arch='ConvAP',
-        # agg_config={'in_channels': 256,
-        #             'out_channels': 256,
-        #             's1' : 2,
-        #             's2' : 2},
+         agg_arch='ConvAP',
+         agg_config={'in_channels': 256,
+                     'out_channels': 256,
+                     's1' : 2,
+                     's2' : 2},
 
 #         agg_arch='avg',
 #         agg_config={},
