@@ -269,8 +269,11 @@ if __name__ == '__main__':
         #---------------------
         #---- Aggregator -----
         
+
+
         #agg_arch='GeM',
         #agg_config={'p': 3},
+
 
 
         #agg_arch='MixVPR',
@@ -285,11 +288,13 @@ if __name__ == '__main__':
         
 
 
+
          agg_arch='ConvAP',
          agg_config={'in_channels': 256,
                      'out_channels': 256,
                      's1' : 2,
                      's2' : 2},
+
 
 #         agg_arch='avg',
 #         agg_config={},
@@ -298,9 +303,9 @@ if __name__ == '__main__':
         #-----------------------------------
         #---- Training hyperparameters -----
         #
-        lr=0.0002, # 0.03 for sgd , for adam 0.0002
+        lr=0.01, # 0.03 for sgd , for adam 0.0002
         optimizer='adamw', # sgd, adam or adamw
-        weight_decay=0.0, # 0.001 for sgd or 0.0 for adam
+        weight_decay=0.001, # 0.001 for sgd or 0.0 for adam
         momentum=0.9,
         warmpup_steps=600,
         milestones=[5, 10, 15, 25],
