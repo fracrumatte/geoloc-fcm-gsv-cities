@@ -3,10 +3,6 @@ from torch.utils.data.dataloader import DataLoader
 from torchvision import transforms as T
 
 from dataloaders.train.GSVCitiesDataset import GSVCitiesDataset
-from dataloaders.val.PittsburghDataset import PittsburghDataset
-from dataloaders.val.MapillaryDataset import MSLS
-from dataloaders.val.NordlandDataset import NordlandDataset
-from dataloaders.val.SPEDDataset import SPEDDataset
 from dataloaders.val.SF_Dataset import SF_Dataset
 
 
@@ -21,7 +17,6 @@ VIT_MEAN_STD = {'mean': [0.5, 0.5, 0.5],
 TRAIN_CITIES = [
     'bangkok',
     'buenosaires',
-
     'losangeles',
     'mexicocity',
     'osl', # refers to Oslo
@@ -53,14 +48,14 @@ class GSVCitiesDataModule(pl.LightningDataModule):
                  img_per_place=4,
                  min_img_per_place=4,
                  shuffle_all=False,
-                 image_size=(480, 640), #maybe update to 224 x 224
+                 image_size=(480, 640), 
                  num_workers=4,
                  show_data_stats=True,
                  cities=TRAIN_CITIES,
                  mean_std=IMAGENET_MEAN_STD,
                  batch_sampler=None,
                  random_sample_from_each_place=True,
-                 val_set_names=['sf_val']  #cambiare con dataset_sf_val ???
+                 val_set_names=['sf_val'] 
                  ):
         super().__init__()
         self.batch_size = batch_size
@@ -112,19 +107,8 @@ class GSVCitiesDataModule(pl.LightningDataModule):
             # load validation sets (pitts_val, msls_val, ...etc)
             self.val_datasets = []
             for valid_set_name in self.val_set_names:
-                if 'pitts30k' in valid_set_name.lower():
-                    self.val_datasets.append(PittsburghDataset(which_ds=valid_set_name,
-                        input_transform=self.valid_transform))
-                elif valid_set_name.lower() == 'msls_val':
-                    self.val_datasets.append(MSLS(
-                        input_transform=self.valid_transform))
-                elif valid_set_name.lower() == 'nordland':
-                    self.val_datasets.append(NordlandDataset(
-                        input_transform=self.valid_transform))
-                elif valid_set_name.lower() == 'sped':
-                    self.val_datasets.append(SPEDDataset(
-                        input_transform=self.valid_transform))
-                elif valid_set_name.lower() == 'sf_val':
+               
+                if valid_set_name.lower() == 'sf_val':
                     self.val_datasets.append(SF_Dataset(which_ds=valid_set_name,    
                         input_transform=self.valid_transform))
                 elif valid_set_name.lower() == 'sf_test':
