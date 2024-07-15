@@ -149,8 +149,7 @@ class VPRModel(pl.LightningModule):
         return loss
     
 
-    all_losses=[]
-    losses=[]
+    
     # This is the training step that's executed at each iteration
     def training_step(self, batch, batch_idx):
         places, labels = batch
@@ -168,15 +167,13 @@ class VPRModel(pl.LightningModule):
         loss = self.loss_function(descriptors, labels) # Call the loss_function we defined above
         
         self.log('loss', loss.item(), logger=True)
-        self.losses.append(loss)
         return {'loss': loss}
     
     # This is called at the end of eatch training epoch
     def training_epoch_end(self, training_step_outputs):
         # we empty the batch_acc list for next epoch
         self.batch_acc = []
-        self.all_losses.append(self.losses)
-        self.losses=[]
+        
 
     # For validation, we will also iterate step by step over the validation set
     # this is the way Pytorch Lghtning is made. All about modularity, folks.
@@ -229,7 +226,6 @@ class VPRModel(pl.LightningModule):
             self.log(f'{val_set_name}/R1', recalls_dict[1], prog_bar=False, logger=True)
             self.log(f'{val_set_name}/R5', recalls_dict[5], prog_bar=False, logger=True)
             self.log(f'{val_set_name}/R10', recalls_dict[10], prog_bar=False, logger=True)
-            self.log('all_losses', self.all_losses, prog_bar=False, logger=True)
         print('\n\n')
             
             
