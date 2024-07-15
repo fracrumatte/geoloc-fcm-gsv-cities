@@ -262,22 +262,17 @@ if __name__ == '__main__':
         
         #---------------------
         #---- Aggregator -----
-        #agg_arch='CosPlace',
-        #agg_config={'in_dim': 512,
-         #            'out_dim': 512},
+        
         agg_arch='GeM',
         agg_config={'p': 3},
-        
 
         # agg_arch='ConvAP',
-        # agg_config={'in_channels': 2048,
-        #             'out_channels': 512,
+        # agg_config={'in_channels': 256,
+        #             'out_channels': 256,
         #             's1' : 2,
         #             's2' : 2},
-
         # agg_arch='avg',
         # agg_config={},
-
 
         #-----------------------------------
         #---- Training hyperparameters -----
