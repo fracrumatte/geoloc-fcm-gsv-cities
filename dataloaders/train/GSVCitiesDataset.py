@@ -42,8 +42,6 @@ class GSVCitiesDataset(Dataset):
         self.random_sample_from_each_place = random_sample_from_each_place
         self.transform = transform
 
-
-        # è da scommentare?????
     
         # generate the dataframe contraining images metadata
         self.dataframe = self.__getdataframes()
@@ -111,10 +109,6 @@ class GSVCitiesDataset(Dataset):
         imgs = []
         for i, row in place.iterrows():
             img_name = self.get_img_name(row)
-            #original img_path code
-            # img_path = self.base_path + 'Images/' + \
-            #     row['city_id'] + '/' + img_name
-
             img_path = self.base_path +row['city_id'].lower()+'/'+img_name+'.jpg'
             img = self.image_loader(img_path)
 
@@ -139,25 +133,6 @@ class GSVCitiesDataset(Dataset):
 
     @staticmethod
     def get_img_name(row):
-        """ 
-        # given a row from the dataframe
-        # return the corresponding image name
-
-        city = row['city_id']
-        
-        # now remove the two digit we added to the id
-        # they are superficially added to make ids different
-        # for different cities
-        pl_id = row.name % 10**5  #row.name is the index of the row, not to be confused with image name
-        pl_id = str(pl_id).zfill(7)
-        
-        panoid = row['panoid']
-        year = str(row['year']).zfill(4)
-        month = str(row['month']).zfill(2)
-        northdeg = str(row['northdeg']).zfill(3)
-        lat, lon = str(row['lat']), str(row['lon'])
-        name = str(row['img_name'])
-        return name
-        """
+      
         return row['img_name']
         
